@@ -20,6 +20,7 @@
             });
     }
 
+    NotesController['$inject'] = ['$scope'];
     function NotesController($scope) {
         $scope.message = "Hello, Notely";
     }
