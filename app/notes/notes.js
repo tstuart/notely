@@ -26,9 +26,9 @@
 
     }
 
-    NotesController['$inject'] = ['$scope'];
-    function NotesController($scope) {
-        $scope.message = "Hello, Notely";
+    NotesController['$inject'] = ['$scope', '$state'];
+    function NotesController($scope, $state) {
+        $state.go("notes.form");
     }
 
 })();
