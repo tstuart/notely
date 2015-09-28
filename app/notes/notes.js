@@ -17,7 +17,13 @@
                 url: '/notes',
                 templateUrl: '/notes/notes.html',
                 controller: NotesController
+            })
+
+            .state('notes.form', {
+                url: '/:noteID',
+                templateUrl: '/notes/notes-form.html'
             });
+
     }
 
     NotesController['$inject'] = ['$scope'];
