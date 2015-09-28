@@ -5,8 +5,8 @@
                 <button class="new-note btn btn-default">
                     New Note
                 </button>
-                <ul id="notes" ng-controller="NotesController">
-                    <li  ng-repeat="note in notes">{{ note.title }}</li>
+                <ul id="notes">
+                    <li  ng-repeat="note in notes track by note.id">{{ note.title }}</li>
                 </ul>
             </nav>
         </div>
