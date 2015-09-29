@@ -38,5 +38,9 @@
     NotesFormController['$inject'] = ['$scope', '$state', 'notes'];
     function NotesFormController($scope, $state, notes) {
         $scope.note = notes.findById($state.params.noteId);
+
+        $scope.save = function() {
+            notes.save($scope.note);
+        }
     }
 })();

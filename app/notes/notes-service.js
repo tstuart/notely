@@ -31,7 +31,19 @@
 
         this.findById = function(noteId) {
             return ($filter('filter')(notes, { id: parseInt(noteId) }, true)[0] || {});
-        }
+        };
+
+        this.save = function(note) {
+            $http.post(nevernoteBasePath + 'notes', {
+                api_key: user.apiKey,
+                note: {
+                    title: note.title,
+                    body_html: note.body_html
+                }
+            }).success(function(noteData) {
+                notes.unshift(noteData.note);
+            });
+        };
     }
 
 })();
