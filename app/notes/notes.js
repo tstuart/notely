@@ -6,6 +6,7 @@
         'ui.router'
     ])
         .controller('NotesController', NotesController)
+        .controller('NotesFormController', NotesFormController)
         .config(notesConfig);
 
     notesConfig['$inject'] = ['$stateProvider'];
@@ -33,6 +34,10 @@
         notes.fetchNotes(function(notes) {
             $scope.notes = notes;
         });
+
+        $scope.newNote = function() {
+            $scope.note = {};
+        }
     }
 
     NotesFormController['$inject'] = ['$scope', '$state', 'notes'];
@@ -41,15 +46,20 @@
 
         $scope.save = function() {
             if ($scope.note.id) {
-                notes.update($scope.note).success(function(data) {
-                    //notes.replaceNote(data.note);
-
-
-                    //console.log($scope.note.updated_at);
+                notes.update($scope.note).succes(function(data) {
+                    $scope.note = data.note;
                 });
             }
             else {
                 notes.create($scope.note);
+            }
+        }
+
+        $scope.buttonText = function() {
+            if ($scope.note.id) {
+                return 'Save';
+            } else {
+                return 'Create';
             }
         }
     }
