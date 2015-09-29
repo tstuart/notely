@@ -7,8 +7,8 @@
         .service('notes', notesService);
 
 
-    notesService['$inject'] = ['$http'];
-    function notesService($http) {
+    notesService['$inject'] = ['$http', '$filter'];
+    function notesService($http, $filter) {
         var notes = [];
         var nevernoteBasePath = 'https://nevernote-1150.herokuapp.com/api/v1/';
         var user = {
@@ -29,13 +29,8 @@
             return notes;
         };
 
-        this.findById = function(id) {
-            for (var i = 0; i < notes.length; i++) {
-                if (notes[i].id.toString() === id) {
-                    return notes[i];
-                }
-            }
-            return {};
+        this.findById = function(noteId) {
+            return ($filter('filter')(notes, { id: parseInt(noteId) }, true)[0] || {});
         }
     }
 
