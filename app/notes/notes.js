@@ -37,10 +37,20 @@
 
     NotesFormController['$inject'] = ['$scope', '$state', 'notes'];
     function NotesFormController($scope, $state, notes) {
-        $scope.note = notes.findById($state.params.noteId);
+        $scope.note = angular.copy(notes.findById($state.params.noteId));
 
         $scope.save = function() {
-            notes.save($scope.note);
+            if ($scope.note.id) {
+                notes.update($scope.note).success(function(data) {
+                    //notes.replaceNote(data.note);
+
+
+                    //console.log($scope.note.updated_at);
+                });
+            }
+            else {
+                notes.create($scope.note);
+            }
         }
     }
 })();

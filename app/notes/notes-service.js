@@ -33,29 +33,43 @@
             return ($filter('filter')(notes, { id: parseInt(noteId) }, true)[0] || {});
         };
 
-        this.save = function(note) {
-            // if id undefinded, new note.  Otherwise, save
-            if (note.id) {
-                $http.put(nevernoteBasePath + 'notes/' + note.id, {
-                    api_key: user.apiKey,
-                    note: {
-                        title: note.title,
-                        body_html: note.body_html
-                    }
-                });
-            } else {
-                $http.post(nevernoteBasePath + 'notes', {
-                    api_key: user.apiKey,
-                    note: {
-                        title: note.title,
-                        body_html: note.body_html
-                    }
-                }).success(function(noteData) {
+        this.replaceNote = function(noteData) {
+            for(var i = 0; i < notes.length; i++) {
+                if (notes[i].id === noteData.id) {
+                    notes[i] = noteData;
+                    break;
+                }
+            }
+        };
+
+        this.create = function(note) {
+            $http.post(nevernoteBasePath + 'notes', {
+                api_key: user.apiKey,
+                note: {
+                    title: note.title,
+                    body_html: note.body_html
+                }
+            })
+                .success(function(noteData) {
                     notes.unshift(noteData.note);
                     $state.go('notes.form', { noteId: noteData.note.id });
                 });
-            }
         };
+
+        this.update = function(note) {
+            var self = this;
+            return $http.put(nevernoteBasePath + 'notes/' + note.id, {
+                api_key: user.apiKey,
+                note: {
+                    title: note.title,
+                    body_html: note.body_html
+                }
+            })
+                .success(function(noteData) {
+                    self.replaceNote(noteData.note);
+                });
+        };
+
     }
 
 })();
