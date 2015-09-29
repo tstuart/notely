@@ -24,6 +24,19 @@
                     }
                 });
         };
+
+        this.all = function() {
+            return notes;
+        };
+
+        this.findById = function(id) {
+            for (var i = 0; i < notes.length; i++) {
+                if (notes[i].id.toString() === id) {
+                    return notes[i];
+                }
+            }
+            return {};
+        }
     }
 
 })();
