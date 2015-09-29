@@ -3,7 +3,8 @@
  */
 (function() {
     angular.module('notely.notes', [
-        'ui.router'
+        'ui.router',
+        'textAngular'
     ])
         .controller('NotesController', NotesController)
         .controller('NotesFormController', NotesFormController)
@@ -43,6 +44,7 @@
     function NotesFormController($scope, $state, notes) {
         $scope.note = angular.copy(notes.findById($state.params.noteId));
 
+
         $scope.save = function() {
             if ($scope.note.id) {
                 notes.update($scope.note).success(function(data) {
@@ -60,6 +62,12 @@
             } else {
                 return 'Create';
             }
+        };
+
+        $scope.removeNote = function() {
+            notes.delete($scope.note).success(function() {
+                $state.go('notes.form', { noteId: undefined });
+            });
         };
     }
 })();
