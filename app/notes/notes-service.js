@@ -15,13 +15,10 @@
             apiKey: '$2a$10$R1l5ancV7QWA3Y8xvdRoEOLB7UMGvfxEzyS3EdYNBIgoQb0ZA8gr.'
         };
 
-        this.fetchNotes = function(callback) {
-            $http.get(nevernoteBasePath + 'notes?api_key=' + user.apiKey)
+        this.fetchNotes = function() {
+            return $http.get(nevernoteBasePath + 'notes?api_key=' + user.apiKey)
                 .success(function(notesData) {
                     notes = notesData;
-                    if (callback) {
-                        callback(notes);
-                    }
                 });
         };
 
