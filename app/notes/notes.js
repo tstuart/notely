@@ -20,7 +20,7 @@
             })
 
             .state('notes.form', {
-                url: '/:noteID',
+                url: '/:noteId',
                 templateUrl: '/notes/notes-form.html'
             });
 
