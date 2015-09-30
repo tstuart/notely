@@ -4,13 +4,14 @@ angular.module('notely')
             restrict: 'EA',
             replace: true,
             scope: {},
-            templateUrl: 'notes/notes-sidebar.html',
-            controller: NotesSidbarController
+            templateUrl: '/notes/notes-sidebar.html',
+            controller: NotesSidbarController,
+            controllerAs: 'ctrl'
         };
 
-        NotesSidbarController['$inject'] = ['$scope', '$state', 'notes'];
-        function NotesSidbarController($scope, notes) {
-            $scope.notes = notes.all();
+        NotesSidbarController['$inject'] = ['notes'];
+        function NotesSidbarController(notes) {
+            this.notes = notes.all();
         }
     });
 
