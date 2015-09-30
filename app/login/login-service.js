@@ -28,6 +28,9 @@
                 })
         }
 
+        this.logout = function() {
+            AuthToken.clear();
+        }
     }
 
 })();
