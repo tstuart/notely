@@ -21,7 +21,6 @@
 
         this.clear = function() {
             authToken = undefined;
-            return $window.localStorage.removeItem('authToken');
         }
     }
 
