@@ -6,12 +6,12 @@
     angular.module('notely.login')
         .factory('AuthInterceptor', AuthInterceptor);
 
-    AuthInterceptor['$inject'] = ['AuthToken'];
-    function AuthInterceptor(AuthToken) {
+    AuthInterceptor['$inject'] = ['AuthToken', 'constants'];
+    function AuthInterceptor(AuthToken, constants) {
         return {
             request: function(config) {
                 var token = AuthToken.get();
-                if (token) {
+                if (token && config.url.indexOf(constants.apiBasePath) > -1) {
                     config.headers['Authorization'] = token;
                 }
                 return config;
