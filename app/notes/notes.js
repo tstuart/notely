@@ -19,9 +19,25 @@
                 url: '/notes',
                 abstract: true,
                 resolve: {
-                    notePromise: function(notes){
-                        return notes.fetchNotes();
-                  }
+                    notesLoaded: function($q, $state, $timeout, notes, CurrentUser) {
+                        var deferred = $q.defer();
+                        $timeout(function() {
+                            if (CurrentUser.get().id) {
+                                notes.fetchNotes().success(function() {
+                                    deferred.resolve();
+                                })
+                                    .error(function() {
+                                        deferred.reject();
+                                        $state.go('login');
+                                    });
+                            }
+                            else {
+                                deferred.reject();
+                                $state.go('login');
+                            }
+                        });
+                        return deferred.promise;
+                    }
                 },
                 templateUrl: '/notes/notes.html',
                 controller: NotesController
