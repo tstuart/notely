@@ -31,6 +31,11 @@
                 url: '/{noteId}',
                 templateUrl: '/notes/notes-form.html',
                 controller: NotesFormController
+            })
+
+            .state('login', {
+                url: '/login',
+                templateUrl: '/login/login.html'
             });
 
     }
