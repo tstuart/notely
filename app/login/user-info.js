@@ -1,9 +1,3 @@
-
-
-/**
- * Created by tstuart on 9/30/15.
- */
-
 (function() {
     angular.module('notely.login')
         .service('CurrentUser', CurrentUser);

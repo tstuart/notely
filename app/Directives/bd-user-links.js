@@ -28,7 +28,6 @@ angular.module('notely')
 
             this.logout = function() {
                 login.logout();
-                CurrentUser.clear();
                 $state.go('login');
             };
         }

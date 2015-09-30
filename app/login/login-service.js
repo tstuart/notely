@@ -31,6 +31,7 @@
 
         this.logout = function() {
             AuthToken.clear();
+            CurrentUser.clear();
         }
     }
 
