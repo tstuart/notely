@@ -1,14 +1,15 @@
 /**
  * Created by tstuart on 9/29/15.
  */
-(function() {
-    angular.module('notely')
-        .directive('bdFocusOn', function() {
-            return function (scope, elem, attr) {
-                scope.$on(attr.bdFocusOn, function (e) {
-                    debugger;
+
+angular.module('notely')
+    .directive('bdFocusOn', function() {
+        return {
+            restrict: 'A',
+            link: function(scope, elem, attr) {
+                elem.ready(function() {
                     elem[0].focus();
                 });
-            };
-        });
-})();
+            }
+        };
+    });
