@@ -7,7 +7,6 @@ angular.module('notely')
         return {
             restrict: 'EA',
             replace: true,
-            scope: {},
             template: '\
                 <div class="user-links"> \
                 <div ng-show="ctrl.user().id"> \
