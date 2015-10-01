@@ -47,7 +47,7 @@
                 controller: NotesFormController
             });
     }
-
+    
     NotesFormController['$inject'] = ['$scope', '$state', 'notes'];
     function NotesFormController($scope, $state, notes) {
         $scope.note = angular.copy(notes.findById($state.params.noteId));
